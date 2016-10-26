@@ -1,4 +1,11 @@
 <?php
+	/* AP - MySCRUM Web
+	 * index.php - Página principal
+	 * Creado: 11/10/16 Gabriela Garro
+	 */
+	session_start();
+	session_destroy();
+	session_start();
 
 ?>
 <!DOCTYPE html>
@@ -21,7 +28,7 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
+    <link href="css/freelancer.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
