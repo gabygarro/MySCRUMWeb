@@ -4,6 +4,7 @@
 	 * Creado: 12/10/16 Gabriela Garro
 	 */
 	session_start();
+	include('connection.php');
 	//header("Location: scrummaster/index.php");
 
 	if (empty($_POST['usuario']) || empty($_POST['contrasena'])) {
@@ -11,15 +12,6 @@
 		header("Location: index.php#invalidData"); // Devolver a la pág principal
 	}
 	else {
-		/* Como las siguientes variables son sensibles, se pueden guardar en otro archivo aparte.
-		*/
-		$dbhost = "localhost";
-		$dbuser = "usuarionormal";
-		$dbpass = "12345";
-		$dbname = "myscrum";
-		$dberror = "No se pudo conectar a la base de datos.";
-
-		$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die($dberror);
 
 		if ($conn == true) {
 			echo "Connected!\n";
@@ -38,7 +30,7 @@
 				    	$_SESSION['userType'] = $row['Rol_idRol'];
 
 				    	//Store the userID
-				    	$_SESSION['usernameID'] = $row['idUsuario'];
+				    	$_SESSION['userID'] = $row['idUsuario'];
 
 				    	//Store the user's name
 				    	$_SESSION['correo'] = $row['correo'];
