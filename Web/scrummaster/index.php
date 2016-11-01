@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <script>
-    	var arrayProyectos = <?php echo json_encode($arrayProyectos) ?>;
+    	var arrayProyectos = <?php echo json_encode($arrayProyectos); ?>;
 
     	function popularProyectos() {
     		var select = document.getElementById("proyecto");
@@ -80,7 +80,7 @@
                         <div class="modal-footer text-center">
                             <div class = "container">
                             	<div class="text-center">
-                                	<input name = "submit" type = "submit" class="btn btn-default" value = "Ir a proyecto">
+                                	<input name = "submit" type = "submit" class="btn btn-primary" value = "Ir a proyecto">
                                 </div>	
                             </div>
                         </div>

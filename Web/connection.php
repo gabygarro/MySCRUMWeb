@@ -7,4 +7,5 @@
 	$dberror = "No se pudo conectar a la base de datos.";
 
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die($dberror);
+	$_SESSION['conn'] = $conn;
 ?>

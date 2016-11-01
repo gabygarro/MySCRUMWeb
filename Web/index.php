@@ -1,6 +1,6 @@
 <?php
 	/* AP - MySCRUM Web
-	 * index.php - Página principal
+	 * index.php - Página principal de inicio
 	 * Creado: 11/10/16 Gabriela Garro
 	 */
 	session_start();
@@ -114,8 +114,8 @@
                 <div class="row">
                     <div class="footer-col col-md-6">
                         <h3>Ubicación</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
+                        <p>Cartago
+                            <br>Costa Rica</p>
                     </div>
                     <div class="footer-col col-md-6">
                         <h3>Redes sociales</h3>
@@ -194,7 +194,7 @@
 		                                    <div class = "container">
 	                                        	<div class="text-center">
 	                                            	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-	                                            	<input name = "submit" type = "submit" class="btn btn-default" value = "Iniciar sesión">
+	                                            	<input name = "submit" type = "submit" class="btn btn-primary" value = "Iniciar sesión">
 		                                        </div>	
 	                                        </div>
 		                                </div>
