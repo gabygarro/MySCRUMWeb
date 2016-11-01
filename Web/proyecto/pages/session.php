@@ -1,6 +1,8 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	session_start();
+	if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 	include ("../../connection.php");
 
 	//Obtener la información básica del proyecto actual
@@ -12,6 +14,15 @@
 		$_SESSION['projectDescription'] = $row['descripcion'];
 	}
 
+	function includeHeader() {
+		if ($_SESSION['userType'] == 2) {
+            include ("include/headerPO.php");
+        }
+        if ($_SESSION['userType'] == 3) {
+            include ("include/headerSM.php");
+        }
+	}
+	
 	function getSprints() {
 		$conn = $_SESSION['conn'];
 		$projectID = $_SESSION['projectID'];

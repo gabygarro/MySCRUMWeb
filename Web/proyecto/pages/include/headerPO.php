@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">SCRUM Master</a>
+        <a class="navbar-brand" href="index.php"><?php echo $_SESSION['projectName']; ?> - Product Owner</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -254,17 +254,11 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i> Gráfica de burndown</a>
-                </li>
-                <li>
-                    <a href=""><i class="fa fa-edit fa-fw"></i> Stakeholders</a>
+                    <a href=""><i class="fa fa-edit fa-fw"></i> Agregar stakeholder</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> SCRUM Meetings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a href="">Nuevo SCRUM Meeting</a>
-                        </li>
                         <li>
                             <a href="">Reporte de SCRUM Meeting</a>
                         </li>

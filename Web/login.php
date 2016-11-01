@@ -19,15 +19,19 @@
 			$user = $_POST['usuario'];
 			$pass = $_POST['contrasena'];
 
-			$query = mysqli_query($conn, "SELECT * FROM usuario WHERE correo='$user'");
+			$query = mysqli_query($conn, "SELECT idUsuario, correo, contrasena, idRol, nombreRol
+			 FROM usuario, rol 
+			 WHERE correo = '$user'
+			 AND idRol = Rol_idRol;");
 			$numrows = mysqli_num_rows($query);
 
 			if ($numrows!=0) {
 				while ($row = mysqli_fetch_assoc($query)){
-				    if ($row['correo'] == $user && $row['contrasena'] = $pass) {
+				    if ($row['contrasena'] == $pass) {
 
 				    	//Store the user type
-				    	$_SESSION['userType'] = $row['Rol_idRol'];
+				    	$_SESSION['userType'] = $row['idRol'];
+				    	$_SESSION['userTypeName'] = $row['nombreRol'];
 
 				    	//Store the userID
 				    	$_SESSION['userID'] = $row['idUsuario'];
@@ -36,11 +40,12 @@
 				    	$_SESSION['correo'] = $row['correo'];
 
 				    	//User type check
-				    	if ($row['Rol_idRol'] == 3) //si es scrummaster
-				    		header("Location: scrummaster/index.php");
+				    	/*if ($row['Rol_idRol'] == 3) //si es scrummaster
+				    		header("Location: proyecto/");
 				    	elseif ($row['Rol_idRol'] == 2) {
-				    		header("Location: productowner/index.php");
-				    	}
+				    		header("Location: productowner/");
+				    	}*/
+				    	header("Location: proyecto/");
 				    	/*poner más ifs para cada tipo de usuario*/
 				    }
 				}

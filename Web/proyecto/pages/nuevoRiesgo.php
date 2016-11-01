@@ -3,12 +3,26 @@
      * nuevoRiesgo.php - Form de nuevo riesgo
      * Creado: 31/10/16 Gabriela Garro
      */
-    require_once'session.php';
-    require_once 'inserts.php';
+    //Iniciar la sesión si no ha sido iniciada
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     //Validación de que el usuario inició sesión
     if (!isset($_SESSION['userID'])) {
         header("Location: ../../#NotSignedIn");
     }
+    //Validación de tipo de usuario
+    if (intval($_SESSION['userType']) != 3 && intval($_SESSION['userType']) != 2) {
+        header("Location: ../../#NotAllowed");
+    }
+    //Validación de que se eligió un proyecto
+    if (!isset($_SESSION['projectID'])) {
+        header("Location: ../../#NoProjectChosen");
+    }
+    //Incluir los archivos externos
+    require_once'session.php';
+    require_once 'inserts.php';
+    //Validar si se envió el form
     if (isset($_POST['submit'])) {
         unset($_POST['submit']);
         //Insertar el riesgo
@@ -84,7 +98,9 @@
 <body>
     <div id="wrapper">
 
-    <?php include ("include/header.php"); ?>
+    <?php 
+        includeHeader();
+    ?>  
 
         <div id="page-wrapper">
             <div class="row">

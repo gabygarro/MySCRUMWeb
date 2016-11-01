@@ -7,7 +7,8 @@
 	header('Content-type: text/html; charset=utf-8');
 	include('../connection.php');
 	//Chequear si el formulario fue enviado para redireccionar
-	if (isset($_POST['submit'])) {
+	if (isset($_POST['submit']) && isset($_POST['proyecto'])) {
+        unset($_POST['submit']);
 		$_SESSION['projectID'] = intval($_POST['proyecto']);
 		header("Location: pages/");
 	}
@@ -80,7 +81,7 @@
                         <div class="modal-footer text-center">
                             <div class = "container">
                             	<div class="text-center">
-                                	<input name = "submit" type = "submit" class="btn btn-primary" value = "Ir a proyecto">
+                                	<input name="submit" type="submit" class="btn btn-primary" value = "Ir a proyecto">
                                 </div>	
                             </div>
                         </div>
