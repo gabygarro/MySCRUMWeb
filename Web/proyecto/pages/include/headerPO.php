@@ -245,22 +245,22 @@
                             <a href="nuevoRiesgo.php">Nuevo riesgo</a>
                         </li>
                         <li>
-                            <a href="">Tabla de riesgos</a>
+                            <a href="tablaRiesgos.php">Tabla de riesgos</a>
                         </li>
                         <li>
-                            <a href="">Gráficos de riesgos</a>
+                            <a href="#">Gráficos de riesgos</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-edit fa-fw"></i> Agregar stakeholder</a>
+                    <a href="#"><i class="fa fa-edit fa-fw"></i> Agregar stakeholder</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> SCRUM Meetings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="">Reporte de SCRUM Meeting</a>
+                            <a href="#">Reporte de SCRUM Meeting</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

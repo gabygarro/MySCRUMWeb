@@ -22,7 +22,7 @@
             include ("include/headerSM.php");
         }
 	}
-	
+
 	function getSprints() {
 		$conn = $_SESSION['conn'];
 		$projectID = $_SESSION['projectID'];
@@ -77,6 +77,32 @@
 			$arrayImpactos[] = [$row['idImpacto'], $row['impacto']];
 		}
 		return $arrayImpactos;
+	}
+
+	function getRiesgos() {
+		$conn = $_SESSION['conn'];
+		$projectID = $_SESSION['projectID'];
+		//Voy a traerme los ids de los sprints que sé que están en el proyecto actual
+		//para simplificar el query.
+		$arraySprints = getSprints();
+		$arrayRiesgos = array();
+		for ($i = 0; $i < sizeof($arraySprints); $i++) {
+			$idSprint = intval($arraySprints[$i][0]);
+			$queryRiesgos = mysqli_query($conn, "SELECT identificador, descripcionCorta,
+			planAccion, estrategia, nombre, apellidos, rol, probabilidad, impacto
+			FROM Riesgo, RiesgoXSprint, Impacto, EstrategiaManejo, Stakeholder
+			WHERE Sprint_idSprint = '$idSprint'
+			AND Riesgo_idRiesgo = idRiesgo
+			AND EstrategiaManejo_idEstrategiaManejo = idEstrategiaManejo
+			AND Stakeholder_responsable = idStakeholder
+			AND Impacto_idImpacto = idImpacto;");
+			while ($row = mysqli_fetch_assoc($queryRiesgos)) { 
+				$arrayRiesgos[] = [$arraySprints[$i][1], $row['identificador'], $row['descripcionCorta'],
+					$row['planAccion'], $row['estrategia'], $row['nombre'] . " " . $row['apellidos'] 
+					. " (" . $row['rol'] . ")", $row['probabilidad'], $row['impacto']];
+			}
+		}
+		return $arrayRiesgos;
 	}
 
 ?>

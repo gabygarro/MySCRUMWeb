@@ -175,7 +175,7 @@ CREATE TABLE `riesgo` (
   CONSTRAINT `fk_Riesgo_EstrategiaManejo1` FOREIGN KEY (`EstrategiaManejo_idEstrategiaManejo`) REFERENCES `estrategiamanejo` (`idEstrategiaManejo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Impacto1` FOREIGN KEY (`Impacto_idImpacto`) REFERENCES `impacto` (`idImpacto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Stakeholder1` FOREIGN KEY (`Stakeholder_responsable`) REFERENCES `stakeholder` (`idStakeholder`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -475,7 +475,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idUsuario`),
   KEY `fk_Usuario_Rol1_idx` (`Rol_idRol`),
   CONSTRAINT `fk_Usuario_Rol1` FOREIGN KEY (`Rol_idRol`) REFERENCES `rol` (`idRol`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +484,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'scrummaster@icost.com','scrummaster',3);
+INSERT INTO `usuario` VALUES (1,'scrummaster@icost.com','scrummaster',3),(2,'productowner@icost.com','productowner',2);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +512,7 @@ CREATE TABLE `usuarioxproyecto` (
 
 LOCK TABLES `usuarioxproyecto` WRITE;
 /*!40000 ALTER TABLE `usuarioxproyecto` DISABLE KEYS */;
-INSERT INTO `usuarioxproyecto` VALUES (1,1);
+INSERT INTO `usuarioxproyecto` VALUES (1,1),(1,2);
 /*!40000 ALTER TABLE `usuarioxproyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,4 +555,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-31 23:03:56
+-- Dump completed on 2016-11-01 17:11:27

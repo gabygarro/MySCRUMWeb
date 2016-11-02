@@ -245,10 +245,10 @@
                             <a href="nuevoRiesgo.php">Nuevo riesgo</a>
                         </li>
                         <li>
-                            <a href="">Tabla de riesgos</a>
+                            <a href="tablaRiesgos.php">Tabla de riesgos</a>
                         </li>
                         <li>
-                            <a href="">Mapa de calor de riesgos</a>
+                            <a href="#">Mapa de calor de riesgos</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -260,10 +260,10 @@
                     <a href="#"><i class="fa fa-edit fa-fw"></i> Stakeholders<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="">Tabla de stakeholders</a>
+                            <a href="#">Tabla de stakeholders</a>
                         </li>
                         <li>
-                            <a href="">Gráfico de stakeholders</a>
+                            <a href="#">Gráfico de stakeholders</a>
                         </li>
                     </ul>
                 </li>
@@ -271,10 +271,10 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> SCRUM Meetings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="">Nuevo SCRUM Meeting</a>
+                            <a href="#">Nuevo SCRUM Meeting</a>
                         </li>
                         <li>
-                            <a href="">Reporte de SCRUM Meeting</a>
+                            <a href="#">Reporte de SCRUM Meeting</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
