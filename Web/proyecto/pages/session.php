@@ -105,4 +105,78 @@
 		return $arrayRiesgos;
 	}
 
+	function getRiesgosLite() {
+		$conn = $_SESSION['conn'];
+		$projectID = $_SESSION['projectID'];
+		//Voy a traerme los ids de los sprints que sé que están en el proyecto actual
+		//para simplificar el query.
+		$arraySprints = getSprints();
+		$arrayRiesgos = [];
+		for ($i = 0; $i < sizeof($arraySprints); $i++) {
+			$idSprint = intval($arraySprints[$i][0]);
+			$queryRiesgos = mysqli_query($conn, "SELECT identificador, probabilidad, idImpacto
+			FROM Riesgo, RiesgoXSprint, Impacto, EstrategiaManejo, Stakeholder
+			WHERE Sprint_idSprint = '$idSprint'
+			AND Riesgo_idRiesgo = idRiesgo
+			AND EstrategiaManejo_idEstrategiaManejo = idEstrategiaManejo
+			AND Stakeholder_responsable = idStakeholder
+			AND Impacto_idImpacto = idImpacto;");
+			while ($row = mysqli_fetch_assoc($queryRiesgos)) { 
+				$arrayRiesgos[] = [$row['identificador'], $row['probabilidad'], $row['idImpacto']];
+			}
+		}
+		return $arrayRiesgos;
+	}
+
+	function getRisksJSObject() {
+		//Array de objs
+		$arrayObjs = [];
+		//Definir clase riesgo
+		class Riesgo {
+			var $x;
+			var $y;
+			var $z;
+			var $data;
+		}
+		//Obtener los riesgos del proyecto actual de la bd
+		$arrayRiesgos = getRiesgosLite();
+		//Iterar por el array de riesgos para hacer un array de objs
+		for ($i = 0; $i < sizeof($arrayRiesgos); $i++) {
+			$x = $arrayRiesgos[$i][2] - 1; // Impacto, para obtener valores 0-4
+			$y = 0; // Valor de probabilidad
+			$z = 0; // Valor de cantidad de riesgos
+			$probabilidad = floatval($arrayRiesgos[$i][1]);
+			$identificador = $arrayRiesgos[$i][0];
+			if ($probabilidad <= 20) $y = 0;
+			elseif (20 < $probabilidad && $probabilidad <= 40) $y = 1;
+			elseif (40 < $probabilidad && $probabilidad <= 60) $y = 2;
+			elseif (60 < $probabilidad && $probabilidad <= 80) $y = 3;
+			elseif (80 < $probabilidad && $probabilidad <= 100) $y = 4;
+			//Chequear si un obj con esos valores ya está en el array
+			$concatenado = false;
+			for ($j = 0; $j < sizeof($arrayObjs) && !$concatenado; $j++) {
+				//Si el obj $j tiene los valores de x y y iguales, concatenar
+				$obj = $arrayObjs[$j];
+				//echo $obj->x . " " . $obj->y;
+				if ($obj->x == $x && $obj->y == $y) {
+					//Concatenar un array al final de data
+					$obj->data[] = [$identificador, $probabilidad];
+					$obj->z++;
+					$concatenado = true;
+				}
+			}
+			if (!$concatenado) { //Si nunca se encuentra un match en la lista
+				//Crear el objeto
+				$obj = new Riesgo;
+				$obj->x = $x;
+				$obj->y = $y;
+				$obj->z = 1;
+				$obj->data = [[$identificador, $probabilidad]];
+				$arrayObjs[] = $obj;
+			}
+				
+		}
+		return json_encode($arrayObjs);
+	}
+
 ?>

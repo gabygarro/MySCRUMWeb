@@ -248,7 +248,7 @@
                             <a href="tablaRiesgos.php">Tabla de riesgos</a>
                         </li>
                         <li>
-                            <a href="#">Gráficos de riesgos</a>
+                            <a href="mapaCalor.php">Mapa de calor de riesgos</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

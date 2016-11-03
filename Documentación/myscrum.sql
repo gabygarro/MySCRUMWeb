@@ -175,7 +175,7 @@ CREATE TABLE `riesgo` (
   CONSTRAINT `fk_Riesgo_EstrategiaManejo1` FOREIGN KEY (`EstrategiaManejo_idEstrategiaManejo`) REFERENCES `estrategiamanejo` (`idEstrategiaManejo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Impacto1` FOREIGN KEY (`Impacto_idImpacto`) REFERENCES `impacto` (`idImpacto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Stakeholder1` FOREIGN KEY (`Stakeholder_responsable`) REFERENCES `stakeholder` (`idStakeholder`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `riesgo` (
 
 LOCK TABLES `riesgo` WRITE;
 /*!40000 ALTER TABLE `riesgo` DISABLE KEYS */;
-INSERT INTO `riesgo` VALUES (1,'BNM001','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',20,'Este es un plan de acción',1,1,2),(2,'BNM002','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',14,'Este es un plan de acción',1,1,1);
+INSERT INTO `riesgo` VALUES (1,'BNM001','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',20,'Este es un plan de acción',1,1,2),(2,'BNM002','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',14,'Este es un plan de acción',1,1,1),(3,'BNM003','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',12,'Este es un plan de acción',1,1,1),(4,'BNM004','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',60,'Este es un plan de acción',1,1,3),(5,'BNM005','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',10,'Este es un plan de acción',1,1,4);
 /*!40000 ALTER TABLE `riesgo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `riesgoxsprint` (
 
 LOCK TABLES `riesgoxsprint` WRITE;
 /*!40000 ALTER TABLE `riesgoxsprint` DISABLE KEYS */;
-INSERT INTO `riesgoxsprint` VALUES (1,1),(2,2);
+INSERT INTO `riesgoxsprint` VALUES (1,1),(3,1),(4,1),(5,1),(2,2);
 /*!40000 ALTER TABLE `riesgoxsprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,4 +555,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-01 17:11:27
+-- Dump completed on 2016-11-02 23:56:10
