@@ -256,6 +256,22 @@
 		return $arrayTareas;
 	}
 
+	//Devuelve las tareas que fueron planificadas para terminar en tal fecha
+	function getTareasPlanificadas($idSprint, $fecha) {
+		$conn = $_SESSION['conn'];
+		$query = mysqli_query($conn, "SELECT Sprint_idSprint, idTarea, horas, puntos
+			FROM TareaXSprint, Tarea
+			WHERE Sprint_idSprint = '$idSprint'
+			AND Tarea_idTarea = idTarea
+			AND finPlanificado = '$fecha';");
+		$arrayTareas = [];
+		while ($row = mysqli_fetch_assoc($query)) { 
+			$arrayTareas[] = [$row['Sprint_idSprint'], $row['idTarea'], 
+			$row['horas'], $row['puntos']];
+		}
+		return $arrayTareas;
+	}
+
 	function getBurndownArray(){
 		//Obtener la lista de ids de sprints
 		$arraySprints = getSprints();
@@ -266,6 +282,8 @@
 			var $totalPuntos;
 			var $arrayHoras;
 			var $arrayPuntos;
+			var $arrayHorasPlanificadas;
+			var $arrayPuntosPlanificados;
 		}
 		//Lista para almacenar los objetos SprintData, esto es lo que se va a retornar
 		$arrayDatos = [];
@@ -279,25 +297,38 @@
 			//Calcular el array de horas y puntos
 			$arrayHoras = [];
 			$arrayPuntos = [];
+			$arrayHorasPlanificadas = [];
+			$arrayPuntosPlanificados = [];
 			//Puntos y horas quemadas (para calcular en el ciclo)
 			$burnedHours = $sprintData->totalHoras;
 			$burnedPoints = $sprintData->totalPuntos;
+			$burnedHoursP = $sprintData->totalHoras; //Datos planificados
+			$burnedPointsP = $sprintData->totalPuntos;
 			//Iterar por las fechas de este sprint
 			for ($j = 0; $j < sizeof($sprintData->arrayFechas); $j++) {
 				$fecha = $sprintData->arrayFechas[$j]; //Obtener la fecha actual
 				//Obtener la lista de tareas que finalizan en esa fecha
 				$arrayTareas = getTareasFinalizadas($idSprint, $fecha);
-				//Iterar por esa lista de tareas para obtener sus puntos/horas
+				$arrayTareasP = getTareasPlanificadas($idSprint, $fecha);
+				//Iterar por las listas de tareas para obtener sus puntos/horas
 				for ($k = 0; $k < sizeof($arrayTareas); $k++) {
 					$burnedHours -= $arrayTareas[$k][2]; //Restar las horas de esta tarea
 					$burnedPoints -= $arrayTareas[$k][3]; //Restar los puntos de esta tarea
 				}
+				for ($k = 0; $k < sizeof($arrayTareasP); $k++) {
+					$burnedHoursP -= $arrayTareasP[$k][2]; //Restar las horas de esta tarea
+					$burnedPointsP -= $arrayTareasP[$k][3]; //Restar los puntos de esta tarea
+				}
 				$arrayHoras[$j] = $burnedHours;
 				$arrayPuntos[$j] = $burnedPoints;
+				$arrayHorasPlanificadas[$j] = $burnedHoursP;
+				$arrayPuntosPlanificados[$j] = $burnedPointsP;
 			}
 			//Asignar los arrays obtenidos
 			$sprintData->arrayHoras = $arrayHoras;
 			$sprintData->arrayPuntos = $arrayPuntos;
+			$sprintData->arrayHorasPlanificadas = $arrayHorasPlanificadas;
+			$sprintData->arrayPuntosPlanificados = $arrayPuntosPlanificados;
 			//Asignar este sprint data al array de retorno con la llave idSprint
 			$arrayDatos[$idSprint] = $sprintData;
 		}

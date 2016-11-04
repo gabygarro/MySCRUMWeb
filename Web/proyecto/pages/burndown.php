@@ -95,11 +95,15 @@
         var arrayFechas = [];
         var arrayHoras = [];
         var arrayPuntos = [];
+        var arrayHorasPlanificadas = [];
+        var arrayPuntosPlanificados = [];
         function sprintOnChange() {
             idSprint = document.getElementById("idSprint").value;
             arrayFechas = arrayBurndown[idSprint].arrayFechas;
             arrayHoras = arrayBurndown[idSprint].arrayHoras;
             arrayPuntos = arrayBurndown[idSprint].arrayPuntos;
+            arrayHorasPlanificadas = arrayBurndown[idSprint].arrayHorasPlanificadas;
+            arrayPuntosPlanificados = arrayBurndown[idSprint].arrayPuntosPlanificados;
             $(function () {
                 Highcharts.chart('container', {
                     chart: {
@@ -109,8 +113,6 @@
                     xAxis: [{
                         categories:  
                             arrayFechas,
-                            /*['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],*/
                         crosshair: true
                     }],
                     yAxis: [{ // Primary yAxis
@@ -153,7 +155,7 @@
                         verticalAlign: 'middle'
                     },
                     series: [{
-                        name: 'Horas',
+                        name: 'Horas reales',
                         type: 'column',
                         yAxis: 1,
                         data: arrayHoras,
@@ -163,15 +165,7 @@
                         }
 
                     }, {
-                        name: 'Puntos',
-                        type: 'column',
-                        yAxis: 0,
-                        data: arrayPuntos,
-                        tooltip: {
-                            valueSuffix: ' p'
-                        }
-                    }, {
-                        name: 'Horas',
+                        name: 'Horas reales',
                         type: 'spline',
                         yAxis: 1,
                         data: arrayHoras,
@@ -184,14 +178,44 @@
                         }
 
                     }, {
-                        name: 'Puntos',
+                        name: 'Horas planificadas',
                         type: 'spline',
-                        //yAxis: 0,
+                        yAxis: 1,
+                        data: arrayHorasPlanificadas,
+                        /*marker: {
+                            enabled: false
+                        },*/
+                        dashStyle: 'shortdot',
+                        tooltip: {
+                            valueSuffix: ' h'
+                        }
+                    }, {
+                        name: 'Puntos reales',
+                        type: 'column',
+                        yAxis: 0,
                         data: arrayPuntos,
                         tooltip: {
                             valueSuffix: ' p'
                         }
-                    }]
+                    }, {
+                        name: 'Puntos reales',
+                        type: 'spline',
+                        yAxis: 0,
+                        data: arrayPuntos,
+                        tooltip: {
+                            valueSuffix: ' p'
+                        }
+                    }, {
+                        name: 'Puntos planificados',
+                        type: 'spline',
+                        yAxis: 0,
+                        data: arrayPuntosPlanificados,
+                        dashStyle: 'shortdot',
+                        tooltip: {
+                            valueSuffix: ' p'
+                        }
+                    }
+                    ]
                 });
             });
         }
