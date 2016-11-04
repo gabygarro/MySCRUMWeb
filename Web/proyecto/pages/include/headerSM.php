@@ -254,7 +254,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i> Gráfica de burndown</a>
+                    <a href="burndown.php"><i class="fa fa-table fa-fw"></i> Gráfica de burndown</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit fa-fw"></i> Stakeholders<span class="fa arrow"></span></a>

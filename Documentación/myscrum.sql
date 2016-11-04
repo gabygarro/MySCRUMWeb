@@ -93,7 +93,7 @@ CREATE TABLE `proyecto` (
 
 LOCK TABLES `proyecto` WRITE;
 /*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
-INSERT INTO `proyecto` VALUES (1,'BN Móvil','Aplicación móvil para trámites bancarios',2);
+INSERT INTO `proyecto` VALUES (1,'BN Móvil','Aplicación móvil para trámites bancarios',15);
 /*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +175,7 @@ CREATE TABLE `riesgo` (
   CONSTRAINT `fk_Riesgo_EstrategiaManejo1` FOREIGN KEY (`EstrategiaManejo_idEstrategiaManejo`) REFERENCES `estrategiamanejo` (`idEstrategiaManejo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Impacto1` FOREIGN KEY (`Impacto_idImpacto`) REFERENCES `impacto` (`idImpacto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Riesgo_Stakeholder1` FOREIGN KEY (`Stakeholder_responsable`) REFERENCES `stakeholder` (`idStakeholder`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `riesgo` (
 
 LOCK TABLES `riesgo` WRITE;
 /*!40000 ALTER TABLE `riesgo` DISABLE KEYS */;
-INSERT INTO `riesgo` VALUES (1,'BNM001','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',20,'Este es un plan de acción',1,1,2),(2,'BNM002','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',14,'Este es un plan de acción',1,1,1),(3,'BNM003','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',12,'Este es un plan de acción',1,1,1),(4,'BNM004','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',60,'Este es un plan de acción',1,1,3),(5,'BNM005','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',10,'Este es un plan de acción',1,1,4);
+INSERT INTO `riesgo` VALUES (1,'BNM001','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',20,'Este es un plan de acción',1,1,2),(2,'BNM002','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',14,'Este es un plan de acción',1,1,1),(3,'BNM003','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',12,'Este es un plan de acción',1,1,1),(4,'BNM004','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',60,'Este es un plan de acción',1,1,3),(5,'BNM005','Esta es una descripción corta de un riesgo','Esta es una descripción larga de un riesgo',10,'Este es un plan de acción',1,1,4),(6,'BNM06','','',90,'',1,2,5);
 /*!40000 ALTER TABLE `riesgo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `riesgoxsprint` (
 
 LOCK TABLES `riesgoxsprint` WRITE;
 /*!40000 ALTER TABLE `riesgoxsprint` DISABLE KEYS */;
-INSERT INTO `riesgoxsprint` VALUES (1,1),(3,1),(4,1),(5,1),(2,2);
+INSERT INTO `riesgoxsprint` VALUES (1,1),(3,1),(4,1),(5,1),(2,2),(6,2);
 /*!40000 ALTER TABLE `riesgoxsprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,6 +276,8 @@ CREATE TABLE `sprint` (
   `idSprint` int(11) NOT NULL AUTO_INCREMENT,
   `numSprint` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
+  `inicioSprint` date DEFAULT NULL,
+  `finSprint` date DEFAULT NULL,
   PRIMARY KEY (`idSprint`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -286,7 +288,7 @@ CREATE TABLE `sprint` (
 
 LOCK TABLES `sprint` WRITE;
 /*!40000 ALTER TABLE `sprint` DISABLE KEYS */;
-INSERT INTO `sprint` VALUES (1,1,'Sprint 1'),(2,2,'Sprint 2'),(3,3,'Sprint 3'),(4,1,'Sprint 1'),(5,2,'Sprint 2'),(6,3,'Sprint 3'),(7,1,'Sprint 1'),(8,2,'Sprint 2'),(9,3,'Sprint 3');
+INSERT INTO `sprint` VALUES (1,1,'Sprint 1','2016-10-17','2016-10-31'),(2,2,'Sprint 2','2016-10-31','2016-11-14'),(3,3,'Sprint 3',NULL,NULL),(4,1,'Sprint 1',NULL,NULL),(5,2,'Sprint 2',NULL,NULL),(6,3,'Sprint 3',NULL,NULL),(7,1,'Sprint 1',NULL,NULL),(8,2,'Sprint 2',NULL,NULL),(9,3,'Sprint 3',NULL,NULL);
 /*!40000 ALTER TABLE `sprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +337,7 @@ CREATE TABLE `stakeholder` (
   `apellidos` varchar(100) DEFAULT NULL,
   `rol` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idStakeholder`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,7 +346,7 @@ CREATE TABLE `stakeholder` (
 
 LOCK TABLES `stakeholder` WRITE;
 /*!40000 ALTER TABLE `stakeholder` DISABLE KEYS */;
-INSERT INTO `stakeholder` VALUES (1,1,1,'Que el proyecto sea culminado lo más antes posible','fwalker@bncr.fi.cr','Fabricio','Walker','Product Owner');
+INSERT INTO `stakeholder` VALUES (1,1,1,'Que el proyecto sea culminado lo más antes posible','fwalker@bncr.fi.cr','Fabricio','Walker','Product Owner'),(2,1,0,NULL,'emaselnik@jacaranda.com','Eliška','Máselník','Developer'),(3,1,0,NULL,'lstacey@jacaranda.com','Ludmilla','Stacey','Tester');
 /*!40000 ALTER TABLE `stakeholder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,12 +418,14 @@ CREATE TABLE `tarea` (
   `horas` int(11) NOT NULL,
   `puntos` int(11) NOT NULL,
   `Stakeholder_idStakeholder` int(11) NOT NULL,
-  `inicio` datetime(6) DEFAULT NULL,
-  `fin` datetime(6) DEFAULT NULL,
+  `inicioPlanificado` datetime(6) DEFAULT NULL,
+  `finPlanificado` datetime(6) DEFAULT NULL,
+  `inicioReal` date DEFAULT NULL,
+  `finReal` date DEFAULT NULL,
   PRIMARY KEY (`idTarea`,`Stakeholder_idStakeholder`,`horas`,`puntos`,`descripcion`),
   KEY `fk_Tarea_Stakeholder1_idx` (`Stakeholder_idStakeholder`),
   CONSTRAINT `fk_Tarea_Stakeholder1` FOREIGN KEY (`Stakeholder_idStakeholder`) REFERENCES `stakeholder` (`idStakeholder`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,6 +434,7 @@ CREATE TABLE `tarea` (
 
 LOCK TABLES `tarea` WRITE;
 /*!40000 ALTER TABLE `tarea` DISABLE KEYS */;
+INSERT INTO `tarea` VALUES (1,'Tarea1',6,3,1,NULL,NULL,NULL,'2016-10-15'),(2,'Tarea2',4,2,1,NULL,NULL,NULL,'2016-10-16'),(3,'Tarea3',2,1,1,NULL,NULL,NULL,'2016-10-17'),(4,'Tarea4',4,3,1,NULL,NULL,NULL,'2016-10-17'),(5,'Tarea5',3,1,1,NULL,NULL,NULL,'2016-10-19'),(6,'Tarea6',6,3,2,NULL,NULL,NULL,'2016-10-20'),(7,'Tarea7',4,2,2,NULL,NULL,NULL,'2016-10-21'),(8,'Tarea8',3,1,2,NULL,NULL,NULL,'2016-10-21'),(9,'Tarea9',2,2,2,NULL,NULL,NULL,'2016-10-26'),(10,'Tarea',3,3,2,NULL,NULL,NULL,'2016-10-30'),(11,'Tarea11',4,3,1,NULL,NULL,NULL,'2016-11-02'),(12,'Tarea12',2,1,1,NULL,NULL,NULL,'2016-11-03'),(13,'Tarea13',3,1,1,NULL,NULL,NULL,'2016-11-03'),(14,'Tarea14',4,2,1,NULL,NULL,NULL,'2016-11-05'),(15,'Tarea15',6,3,1,NULL,NULL,NULL,'2016-11-06'),(16,'Tarea16',2,2,2,NULL,NULL,NULL,'2016-11-07'),(17,'Tarea17',4,3,2,NULL,NULL,NULL,'2016-11-08'),(18,'Tarea18',2,1,2,NULL,NULL,NULL,'2016-11-09'),(19,'Tarea19',3,1,2,NULL,NULL,NULL,'2016-11-09'),(20,'Tarea20',4,4,2,NULL,NULL,NULL,'2016-11-12');
 /*!40000 ALTER TABLE `tarea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,6 +462,7 @@ CREATE TABLE `tareaxsprint` (
 
 LOCK TABLES `tareaxsprint` WRITE;
 /*!40000 ALTER TABLE `tareaxsprint` DISABLE KEYS */;
+INSERT INTO `tareaxsprint` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20);
 /*!40000 ALTER TABLE `tareaxsprint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,4 +561,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-02 23:56:10
+-- Dump completed on 2016-11-03 22:31:00
