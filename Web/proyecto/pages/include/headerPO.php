@@ -254,7 +254,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i> Agregar stakeholder</a>
+                    <a href="nuevoStakeholder.php"><i class="fa fa-edit fa-fw"></i> Agregar stakeholder</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> SCRUM Meetings<span class="fa arrow"></span></a>
