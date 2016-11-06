@@ -105,6 +105,26 @@
 		return $arrayRiesgos;
 	}
 
+	function getTablaStakeholders(){
+		$conn = $_SESSION['conn'];
+		$projectID = $_SESSION['projectID'];
+		$arrayStakeholders = [];
+		$query = mysqli_query($conn, "SELECT idStakeholder, nombre, apellidos, correo, 
+			rol, interes, poder, expectativa
+			FROM Stakeholder, StakeholderXProyecto
+			WHERE Proyecto_idProyecto = '$projectID'
+			AND Stakeholder_idStakeholder = idStakeholder;");
+		while ($row = mysqli_fetch_assoc($query)) { 
+			if($row['interes'] == 0) $interes = "Bajo";
+			else $interes = "Alto";
+			if($row['poder'] == 0) $poder = "Bajo";
+			else $poder = "Alto";
+			$arrayStakeholders[] = [$row['idStakeholder'], $row['nombre'] . " " . $row['apellidos'], 
+				$row['correo'], $row['rol'], $interes, $poder, $row['expectativa']];
+		}
+		return $arrayStakeholders;
+	}
+
 	function getRiesgosLite() {
 		$conn = $_SESSION['conn'];
 		$projectID = $_SESSION['projectID'];

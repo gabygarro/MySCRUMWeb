@@ -1,7 +1,7 @@
 <?php
     /* AP - MySCRUM Web
-     * tablaRiesgos.php - Ver detalles de los riesgos en un datatable
-     * Creado: 01/11/16 Gabriela Garro
+     * tablaStakeholders.php - Ver detalles de los stakeholders en un datatable
+     * Creado: 05/11/16 Gabriela Garro
      */
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -10,7 +10,7 @@
     if (!isset($_SESSION['userID'])) {
         header("Location: ../../#NotSignedIn");
     }
-    if (intval($_SESSION['userType']) != 3 && intval($_SESSION['userType']) != 2) {
+    if (intval($_SESSION['userType']) != 3) {
         header("Location: ../../#NotAllowed");
     }
     //Validación de que se eligió un proyecto
@@ -19,8 +19,8 @@
     }
     //Incluir los archivos externos
     include'session.php';
-    //Pedir el array de riesgos
-    $arrayRiesgos = getRiesgos();
+    //Pedir el array de stakeholders
+    $arrayStakeholders = getTablaStakeholders();
 
 ?>
 <!DOCTYPE html>
@@ -62,19 +62,18 @@
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <script>
-        var arrayRiesgos = <?php echo json_encode($arrayRiesgos) ?>;
+        var arrayStakeholders = <?php echo json_encode($arrayStakeholders) ?>;
         $(document).ready(function() {
-            $('#riesgos').DataTable( {
-                data: arrayRiesgos,
+            $('#stakeholders').DataTable( {
+                data: arrayStakeholders,
                 columns: [
-                    {title: "Sprint"},
                     {title: "Id."},
-                    {title: "Descripción"},
-                    {title: "Plan de Acción"},
-                    {title: "Estrategia"},
-                    {title: "Responsable"},
-                    {title: "Probabilidad"},
-                    {title: "Impacto"}
+                    {title: "Nombre"},
+                    {title: "Correo"},
+                    {title: "Rol"},
+                    {title: "Interés"},
+                    {title: "Poder"},
+                    {title: "Expectativa"}
                 ]
             } );
         } );
@@ -92,12 +91,12 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Riesgos</h1>
+                    <h1 class="page-header">Stakeholders</h1>
                 </div><br>
                 <!-- /.col-lg-12 -->
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <table id="riesgos" 
+                        <table id="stakeholders" 
                         class="table table-striped table-bordered table-hover" 
                         width="100%"></table>
                     </div>

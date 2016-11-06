@@ -260,7 +260,7 @@
                     <a href="#"><i class="fa fa-edit fa-fw"></i> Stakeholders<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Tabla de stakeholders</a>
+                            <a href="tablaStakeholders.php">Tabla de stakeholders</a>
                         </li>
                         <li>
                             <a href="#">Gráfico de stakeholders</a>
