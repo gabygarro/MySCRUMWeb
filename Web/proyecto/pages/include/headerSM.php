@@ -263,7 +263,7 @@
                             <a href="tablaStakeholders.php">Tabla de stakeholders</a>
                         </li>
                         <li>
-                            <a href="#">Gráfico de stakeholders</a>
+                            <a href="graficoStakeholders.php">Gráfico de stakeholders</a>
                         </li>
                     </ul>
                 </li>

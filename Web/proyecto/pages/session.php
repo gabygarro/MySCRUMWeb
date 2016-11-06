@@ -125,6 +125,21 @@
 		return $arrayStakeholders;
 	}
 
+	function getStakeholdersGrid(){
+		$conn = $_SESSION['conn'];
+		$projectID = $_SESSION['projectID'];
+		$arrayStakeholders = [];
+		$query = mysqli_query($conn, "SELECT idStakeholder, nombre, apellidos, rol, interes, poder
+			FROM Stakeholder, StakeholderXProyecto
+			WHERE Proyecto_idProyecto = '$projectID'
+			AND Stakeholder_idStakeholder = idStakeholder;");
+		while ($row = mysqli_fetch_assoc($query)) { 
+			$arrayStakeholders[] = [$row['idStakeholder'], $row['nombre'] . " " . $row['apellidos'] .
+			" (" . $row['rol'] . ")", $row['interes'], $row['poder']];
+		}
+		return $arrayStakeholders;
+	}
+
 	function getRiesgosLite() {
 		$conn = $_SESSION['conn'];
 		$projectID = $_SESSION['projectID'];
@@ -192,6 +207,51 @@
 				$obj->y = $y;
 				$obj->z = 1;
 				$obj->data = [[$identificador, $probabilidad]];
+				$arrayObjs[] = $obj;
+			}
+				
+		}
+		return json_encode($arrayObjs);
+	}
+
+	function getStakeholdersJSObject(){
+		//Array de objs
+		$arrayObjs = [];
+		//Definir clase Stakeholder
+		class Stakeholder {
+			var $x;
+			var $y;
+			var $z;
+			var $data;
+		}
+		//Obtener los stakeholders
+		$arrayStakeholders = getStakeholdersGrid();
+		//Iterar por el array de riesgos para hacer un array de objs
+		for ($i = 0; $i < sizeof($arrayStakeholders); $i++) {
+			$x = intval($arrayStakeholders[$i][2]); // Interes
+			$y = intval($arrayStakeholders[$i][3]); // Poder
+			$z = 0; // Valor de cantidad de stakeholders por cuadro
+			$identificador = $arrayStakeholders[$i][0];
+			$nombre = $arrayStakeholders[$i][1];
+			//Chequear si un obj con esos valores ya está en el array
+			$concatenado = false;
+			for ($j = 0; $j < sizeof($arrayObjs) && !$concatenado; $j++) {
+				$obj = $arrayObjs[$j];
+				//Si el obj $j tiene los valores de x y y iguales, concatenar
+				if ($obj->x == $x && $obj->y == $y) {
+					//Concatenar un array al final de data
+					$obj->data[] = [$identificador, $nombre];
+					$obj->z++;
+					$concatenado = true;
+				}
+			}
+			if (!$concatenado) { //Si nunca se encuentra un match en la lista
+				//Crear el objeto
+				$obj = new Stakeholder;
+				$obj->x = $x;
+				$obj->y = $y;
+				$obj->z = 1;
+				$obj->data = [[$identificador, $nombre]];
 				$arrayObjs[] = $obj;
 			}
 				
