@@ -71,4 +71,22 @@
 		    echo "Error: " . $queryAsociar . "<br>" . mysqli_error($conn);
 		}
 	}
+
+	function insertSCRUMMeeting($pidSprint, $pdatetime) {
+		//Formatear
+		$idSprint = intval($pidSprint);
+		$pdatetime[10] = " ";
+		$datetime = $pdatetime;
+		//Obtener valores globales
+		$conn = $_SESSION['conn'];
+
+		$query = mysqli_query($conn, "INSERT INTO SCRUMMeeting
+			(Sprint_idSprint, fecha)
+			VALUES ('$idSprint', '$datetime');");
+		if (mysqli_query($conn, $query)) {
+		    echo "SCRUM meeting creado.<br>";
+		} else {
+		    echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
+		}
+	}
 ?>

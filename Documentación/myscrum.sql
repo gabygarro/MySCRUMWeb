@@ -248,12 +248,14 @@ DROP TABLE IF EXISTS `scrummeeting`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `scrummeeting` (
-  `idSCRUMMeeting` int(11) NOT NULL,
+  `idSCRUMMeeting` int(11) NOT NULL AUTO_INCREMENT,
   `Sprint_idSprint` int(11) NOT NULL,
+  `fecha` datetime(1) DEFAULT NULL,
   PRIMARY KEY (`idSCRUMMeeting`),
+  UNIQUE KEY `Sprint_idSprint_UNIQUE` (`Sprint_idSprint`),
   KEY `fk_SCRUMMeeting_Sprint1_idx` (`Sprint_idSprint`),
   CONSTRAINT `fk_SCRUMMeeting_Sprint1` FOREIGN KEY (`Sprint_idSprint`) REFERENCES `sprint` (`idSprint`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,6 +264,7 @@ CREATE TABLE `scrummeeting` (
 
 LOCK TABLES `scrummeeting` WRITE;
 /*!40000 ALTER TABLE `scrummeeting` DISABLE KEYS */;
+INSERT INTO `scrummeeting` VALUES (5,1,'2016-11-22 12:00:00.0'),(7,2,'2016-11-02 09:00:00.0');
 /*!40000 ALTER TABLE `scrummeeting` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +340,7 @@ CREATE TABLE `stakeholder` (
   `apellidos` varchar(100) DEFAULT NULL,
   `rol` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idStakeholder`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +349,7 @@ CREATE TABLE `stakeholder` (
 
 LOCK TABLES `stakeholder` WRITE;
 /*!40000 ALTER TABLE `stakeholder` DISABLE KEYS */;
-INSERT INTO `stakeholder` VALUES (1,1,1,'Que el proyecto sea culminado lo más antes posible','fwalker@bncr.fi.cr','Fabricio','Walker','Product Owner'),(2,1,0,NULL,'emaselnik@jacaranda.com','Eliška','Máselník','Developer'),(3,1,0,NULL,'lstacey@jacaranda.com','Ludmilla','Stacey','Tester');
+INSERT INTO `stakeholder` VALUES (1,1,1,'Que el proyecto sea culminado lo más antes posible','fwalker@bncr.fi.cr','Fabricio','Walker','Product Owner'),(2,1,0,NULL,'emaselnik@jacaranda.com','Eliška','Máselník','Developer'),(3,1,0,NULL,'lstacey@jacaranda.com','Ludmilla','Stacey','Tester'),(4,1,1,'Esta es una expectativa acerca del proyecto.','swilson@icost.com','Steven','Wilson','Product Owner');
 /*!40000 ALTER TABLE `stakeholder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +377,7 @@ CREATE TABLE `stakeholderxproyecto` (
 
 LOCK TABLES `stakeholderxproyecto` WRITE;
 /*!40000 ALTER TABLE `stakeholderxproyecto` DISABLE KEYS */;
-INSERT INTO `stakeholderxproyecto` VALUES (1,1);
+INSERT INTO `stakeholderxproyecto` VALUES (1,1),(2,1),(3,1),(4,1);
 /*!40000 ALTER TABLE `stakeholderxproyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -561,4 +564,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-04 11:10:59
+-- Dump completed on 2016-11-08 12:03:15
