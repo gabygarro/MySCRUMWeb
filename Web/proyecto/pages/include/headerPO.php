@@ -260,7 +260,7 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> SCRUM Meetings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Reporte de SCRUM Meeting</a>
+                            <a href="SCRUMMeeting.php">Reporte de SCRUM Meeting</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

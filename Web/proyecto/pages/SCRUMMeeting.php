@@ -1,6 +1,6 @@
 <?php
     /* AP - MySCRUM Web
-     * nuevoSCRUMMeeting.php - Form para organizar un nuevo sprint meeting
+     * SCRUMMeeting.php - Form para ingresar datos en un SCRUM meeting
      * Creado: 08/11/16 Gabriela Garro
      */
     //Iniciar la sesión si no ha sido iniciada
@@ -12,7 +12,7 @@
         header("Location: ../../#NotSignedIn");
     }
     //Validación de tipo de usuario
-    if (intval($_SESSION['userType']) != 3) {
+    if (intval($_SESSION['userType']) != 3 && intval($_SESSION['userType']) != 2) {
         header("Location: ../../#NotAllowed");
     }
     //Validación de que se eligió un proyecto
@@ -26,7 +26,7 @@
     if (isset($_POST['submit'])) {
         unset($_POST['submit']);
         //Insertar la reunión
-        insertSCRUMMeeting($_POST['idSprint'], $_POST['datetime']);
+        insertSMreport($_POST['idSprint'], $_POST['queHice'], $_POST['queVoyAHacer'], $_POST['inconvenientes']);
     }
     //Obtener array de sprints
     $arraySprints = getSprints();
@@ -44,7 +44,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Nuevo SCRUM Meeting - MySCRUM - ICOST</title>
+    <title>SCRUM Meeting - MySCRUM - ICOST</title>
 
     <!-- Favicon -->
     <link rel='shortcut icon' href='../../img/favicon.ico' type='image/x-icon'/ >
@@ -95,12 +95,12 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Nuevo SCRUM Meeting</h1>
+                    <h1 class="page-header">SCRUM Meeting</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <form role="form" action="nuevoSCRUMMeeting.php" method="POST" class="registration-form">
+            <form role="form" action="SCRUMMeeting.php" method="POST" class="registration-form">
                 <div class="modal-body">
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -114,16 +114,28 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Fecha</label>
-                            <input type="datetime-local" name="datetime" class="form-control">
+                            <label>¿Qué hice?</label>
+                            <textarea maxlength="200" rows="3" placeholder="¿Qué hice?..." name="queHice" 
+                                id="queHice" class="form-control"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>¿Qué voy a hacer?</label>
+                            <textarea maxlength="200" rows="3" placeholder="¿Qué voy a hacer?..." name="queVoyAHacer" 
+                                id="queVoyAHacer" class="form-control"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Inconvenientes</label>
+                            <textarea maxlength="200" rows="3" placeholder="¿Qué inconvenientes tuve?..." name="inconvenientes" 
+                                id="inconvenientes" class="form-control"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                 </div>
                 <div class="footer">
-                        <div class = "container">
-                            <input name = "submit" type = "submit" class="btn btn-primary" value = "Registrar SCRUM Meeting">  
-                        </div>
+                    <div class = "container">
+                        <input name = "submit" type = "submit" class="btn btn-primary" value = "Registrar">  
                     </div>
                     <br/><br/>
                 </div>

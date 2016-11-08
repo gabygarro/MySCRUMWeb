@@ -274,7 +274,7 @@
                             <a href="nuevoSCRUMMeeting.php">Nuevo SCRUM Meeting</a>
                         </li>
                         <li>
-                            <a href="#">Reporte de SCRUM Meeting</a>
+                            <a href="SCRUMMeeting.php">Reporte de SCRUM Meeting</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

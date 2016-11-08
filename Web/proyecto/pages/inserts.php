@@ -80,13 +80,34 @@
 		//Obtener valores globales
 		$conn = $_SESSION['conn'];
 
-		$query = mysqli_query($conn, "INSERT INTO SCRUMMeeting
+		$query = "INSERT INTO SCRUMMeeting
 			(Sprint_idSprint, fecha)
-			VALUES ('$idSprint', '$datetime');");
+			VALUES ('$idSprint', '$datetime');";
 		if (mysqli_query($conn, $query)) {
 		    echo "SCRUM meeting creado.<br>";
 		} else {
 		    echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
+		}
+	}
+
+	function insertSMreport($pidSprint, $queHice, $queVoyAHacer, $inconvenientes) {
+		//Formatear
+		$idSprint = intval($pidSprint);
+		//Obtener valores globales
+		$conn = $_SESSION['conn'];
+		$idUsuario = $_SESSION['userID'];
+		$query = mysqli_query($conn, "SELECT idSCRUMMeeting FROM SCRUMMeeting WHERE Sprint_idSprint = '$idSprint';");
+		$idSCRUMMeeting = 0;
+		while ($row = mysqli_fetch_assoc($query)) {
+			$idSCRUMMeeting = $row['idSCRUMMeeting'];
+		}
+		$query2 = "INSERT INTO UsuarioXSCRUMMeeting
+			(Usuario_idUsuario, SCRUMMeeting_idSCRUMMeeting, queHice, queVoyAHacer, inconvenientes)
+			VALUES ('$idUsuario', '$idSCRUMMeeting', '$queHice', '$queVoyAHacer', '$inconvenientes');";
+		if (mysqli_query($conn, $query2)) {
+		    echo "Datos ingresados en SCRUM meeting.<br/>";
+		} else {
+		    echo "Error: " . $query2 . "<br>" . mysqli_error($conn) . "<br>";
 		}
 	}
 ?>
